@@ -44,5 +44,11 @@ pipeline{
                 }
             }
         }
-    }
+        stage('upload jar file to nexus'){
+            steps{
+                script{
+                   nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'target/uber.jar', type: 'jar']], credentialsId: 'fc77ba4d-c576-43f5-9bc1-7a5320fbfbc0', groupId: 'com.example', nexusUrl: '192.168.0.16:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'arif-project-release', version: '1.0.0'
+                }
+            }
+        }    
 }
